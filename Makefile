@@ -1,7 +1,7 @@
 .PHONY: build client server lint deploy noRL cl
 
 DOTNET_FLAGS+= -c Release -v quiet -maxcpucount:5 /property:WarningLevel=0 /p:WarningsAsErrors=nullable
-DOTNET_BUILD=dotnet build ${DOTNET_FLAGS}
+DOTNET_BUILD=${DOTNET_ROOT}/dotnet build ${DOTNET_FLAGS}
 
 build: noRL
 	${DOTNET_BUILD}
@@ -38,7 +38,7 @@ lint: noRL
 test:
 	cd RobustToolbox/bin/UnitTesting && ../../../linklibs
 	cd bin/Content.Tests && ../../linklibs
-	dotnet test ${DOTNET_FLAGS}
+	${DOTNET_ROOT}/dotnet test ${DOTNET_FLAGS}
 
 package: noRL
 	python3 Tools/package_server_build.py --hybrid-acz ${PACKAGE_BUILD_ARGS}
